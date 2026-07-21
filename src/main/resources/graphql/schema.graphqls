@@ -2,6 +2,7 @@ type Query {
     hello(name: String): String
     employee: Employee
     employees: [Employee]
+    employeeById(id: ID!): Employee
 }
 
 type Employee {
