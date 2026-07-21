@@ -1,4 +1,11 @@
 type Query {
     hello(name: String): String
+    employee: Employee
+    employees: [Employee]
 }
 
+type Employee {
+	id: ID
+	name: String
+	salary: Float
+}
