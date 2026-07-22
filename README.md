@@ -95,3 +95,22 @@ mutation {
     salary
   }
 }
+
+### Filtering and Sorting Implementation test
+
+query {
+  employees(
+    page: 0,
+    size: 5,
+    sortBy: "salary",
+    direction: "DESC"
+  ) {
+    content {
+      id
+      name
+      salary
+    }
+    totalElements
+    totalPages
+  }
+}

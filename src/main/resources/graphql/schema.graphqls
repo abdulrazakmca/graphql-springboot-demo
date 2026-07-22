@@ -1,8 +1,14 @@
 type Query {
     hello(name: String): String
     employee: Employee
-    employees: [EmployeeDto]
     employeeById(id: ID!): EmployeeDto
+    #old Implementation
+    #employees: [EmployeeDto]
+    # Pagination implementation
+   # employees(page: Int!, size: Int!): EmployeePage
+   #sortBy is a filter here for example sorytBy salary in asec or desc
+   employees(page:Int!,size:Int!,sortBy:String = "name",direction:String="DESC"): EmployeePageDto
+  
 }
 
 type Mutation {
@@ -33,4 +39,15 @@ type Employee {
 	id: ID
 	name: String
 	salary: Float
+}
+
+type EmployeePageDto {
+    content: [EmployeeDto]
+    totalElements: Int
+    totalPages: Int
+    pageNumber: Int
+    pageSize: Int
+    first: Boolean
+    last: Boolean
+
 }

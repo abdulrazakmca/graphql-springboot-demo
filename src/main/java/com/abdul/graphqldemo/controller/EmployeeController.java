@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 
 import com.abdul.graphqldemo.dto.EmployeeCreateDto;
 import com.abdul.graphqldemo.dto.EmployeeDto;
+import com.abdul.graphqldemo.dto.EmployeePageDto;
 import com.abdul.graphqldemo.dto.EmployeeUpdateDto;
 import com.abdul.graphqldemo.service.EmployeeService;
 
@@ -21,11 +22,25 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @QueryMapping
-    public List<EmployeeDto> employees() {
-        return employeeService.getAllEmployeesDto();
-    }
+//    @QueryMapping
+//    public List<EmployeeDto> employees() {
+//        return employeeService.getAllEmployeesDto();
+//    }
 
+    @QueryMapping
+    public EmployeePageDto employees(
+            @Argument int page,
+            @Argument int size,
+            @Argument String sortBy,
+            @Argument String direction) {
+
+        return employeeService.getEmployees(
+                page,
+                size,
+                sortBy,
+                direction);
+    }
+    
     @QueryMapping
     public EmployeeDto employeeById(@Argument Long id) {
         return employeeService.getEmployeeDtoById(id);

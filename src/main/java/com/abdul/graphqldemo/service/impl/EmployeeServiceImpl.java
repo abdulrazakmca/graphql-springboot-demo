@@ -3,10 +3,15 @@ package com.abdul.graphqldemo.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.abdul.graphqldemo.dto.EmployeeCreateDto;
 import com.abdul.graphqldemo.dto.EmployeeDto;
+import com.abdul.graphqldemo.dto.EmployeePageDto;
 import com.abdul.graphqldemo.dto.EmployeeUpdateDto;
 import com.abdul.graphqldemo.entity.Employee;
 import com.abdul.graphqldemo.exception.EmployeeNotFoundException;
@@ -84,5 +89,36 @@ public class EmployeeServiceImpl implements EmployeeService {
 	    
 	    return "Employee deleted successfully";
 	}
+
+	@Override
+	public EmployeePageDto getEmployees(int page, int size, String sortBy, String direction) {
+		//sortby name here it is default
+		Sort sort = direction.equalsIgnoreCase("DESC")
+	            ? Sort.by(sortBy).descending()
+	            : Sort.by(sortBy).ascending();
+		
+		Pageable pageable = PageRequest.of(page, size, sort);
+		
+		Page<Employee> employeePage = employeeRepository.findAll(pageable);
+
+		List<EmployeeDto> employees =
+		            employeePage.getContent()
+		                    .stream()
+		                    .map(employeeMapper::toDto)
+		                    .toList();
+	    return new EmployeePageDto(
+	            employees,
+	            employeePage.getTotalElements(),
+	            employeePage.getTotalPages(),
+	            employeePage.getNumber(),
+	            employeePage.getSize(),
+	            employeePage.isFirst(),
+	            employeePage.isLast()
+	    );
+		
+	
+	}
+
+	
 
 }
