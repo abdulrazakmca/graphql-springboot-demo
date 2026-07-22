@@ -13,6 +13,8 @@ import com.abdul.graphqldemo.dto.EmployeeDto;
 import com.abdul.graphqldemo.dto.EmployeeUpdateDto;
 import com.abdul.graphqldemo.service.EmployeeService;
 
+import jakarta.validation.Valid;
+
 @Controller
 public class EmployeeController {
 
@@ -30,12 +32,12 @@ public class EmployeeController {
     }
     
     @MutationMapping
-    public EmployeeDto createEmployee(@Argument("input") EmployeeCreateDto employeeDto) {
+    public EmployeeDto createEmployee(@Argument("input") @Valid EmployeeCreateDto employeeDto) {
     	return employeeService.createEmployee(employeeDto);
     }
 
     @MutationMapping
-    public EmployeeDto updateEmployee(@Argument Long id,@Argument("input") EmployeeUpdateDto employeeDto) {
+    public EmployeeDto updateEmployee(@Argument Long id,@Argument("input") @Valid EmployeeUpdateDto employeeDto) {
     	return employeeService.updateEmployee(id, employeeDto);
     }
     

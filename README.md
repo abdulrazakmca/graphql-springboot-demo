@@ -74,3 +74,24 @@ mutation {
 mutation {
   deleteEmployee(id: 6)
 }
+
+### Exception Handling, give invalid Id
+
+mutation {
+  deleteEmployee(id: 10000)
+}
+
+### Constraint Violation/ Validation of Input fields
+
+mutation {
+  createEmployee(
+    input: {
+      name: ""
+      salary: -1
+    }
+  ) {
+    id
+    name
+    salary
+  }
+}
