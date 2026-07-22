@@ -1,8 +1,32 @@
 type Query {
     hello(name: String): String
     employee: Employee
-    employees: [Employee]
-    employeeById(id: ID!): Employee
+    employees: [EmployeeDto]
+    employeeById(id: ID!): EmployeeDto
+}
+
+type Mutation {
+    createEmployee(input: EmployeeCreateDto!): EmployeeDto 
+    updateEmployee(id: ID!, input: EmployeeUpdateDto!): EmployeeDto
+    deleteEmployee(id: ID!): String
+}
+
+
+input EmployeeUpdateDto {
+    name: String!
+    salary: Float!
+}
+
+input EmployeeCreateDto  {
+    name: String!
+    salary: Float!
+}
+
+
+type EmployeeDto{
+ 	id: ID
+	name: String
+	salary: Float
 }
 
 type Employee {

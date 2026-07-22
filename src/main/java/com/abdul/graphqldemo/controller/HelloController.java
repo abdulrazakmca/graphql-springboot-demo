@@ -28,17 +28,17 @@ public class HelloController {
 	}
 
 	@QueryMapping
-	public Employee employee() {
+	public Employee helloEmployee() {
 		return new Employee(1L, "Abdul", 10000.50);
 	}
 	
 	@QueryMapping
-	public List<Employee> employees(){
+	public List<Employee> helloEmployees(){
 		return getEmployees();
 	}
 	
 	@QueryMapping
-	public Employee employeeById(@Argument Long id) {
+	public Employee helloEmployeeById(@Argument Long id) {
 	   return getEmployees().stream()
 				            .filter(byId(id))
 				            .findFirst()
