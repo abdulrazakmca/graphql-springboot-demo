@@ -1,13 +1,13 @@
 package com.abdul.graphqldemo.exception;
 
-public class EmployeeNotFoundException extends RuntimeException {
+public class ResourceNotFoundException extends RuntimeException {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public EmployeeNotFoundException(String message) {
+	public ResourceNotFoundException(String message) {
 		super(message);
 	}
 

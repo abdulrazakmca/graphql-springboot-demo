@@ -14,7 +14,7 @@ import com.abdul.graphqldemo.dto.EmployeeDto;
 import com.abdul.graphqldemo.dto.EmployeePageDto;
 import com.abdul.graphqldemo.dto.EmployeeUpdateDto;
 import com.abdul.graphqldemo.entity.Employee;
-import com.abdul.graphqldemo.exception.EmployeeNotFoundException;
+import com.abdul.graphqldemo.exception.ResourceNotFoundException;
 import com.abdul.graphqldemo.mapper.EmployeeMapper;
 import com.abdul.graphqldemo.repository.EmployeeRepository;
 import com.abdul.graphqldemo.service.EmployeeService;
@@ -51,7 +51,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public EmployeeDto getEmployeeDtoById(Long id) {
-		Employee byId = employeeRepository.findById(id).orElseThrow(() -> new EmployeeNotFoundException("Employee not found with id: " + id));
+		Employee byId = employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee not found with id: " + id));
 				                          
 		return employeeMapper.toDto(byId);
 	}
@@ -69,7 +69,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public EmployeeDto updateEmployee(Long id, EmployeeUpdateDto updateInput) {
 		// TODO Auto-generated method stub
-		Employee byId = employeeRepository.findById(id).orElseThrow(() -> new EmployeeNotFoundException("Employee not found with id: " + id));
+		Employee byId = employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee not found with id: " + id));
 		if(updateInput.name()!=null) {
 		byId.setName(updateInput.name());
 		}
@@ -83,7 +83,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public String deleteEmployee(Long id) {
 		Employee employee = employeeRepository.findById(id)
-	            .orElseThrow(() -> new EmployeeNotFoundException("Employee not found with id: " + id));
+	            .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id: " + id));
 
 	    employeeRepository.delete(employee);
 	    

@@ -8,6 +8,7 @@ type Query {
    # employees(page: Int!, size: Int!): EmployeePage
    #sortBy is a filter here for example sorytBy salary in asec or desc
    employees(page:Int!,size:Int!,sortBy:String = "name",direction:String="DESC"): EmployeePageDto
+   getDepartmentDto(id: ID!): DepartmentDto
   
 }
 
@@ -18,14 +19,17 @@ type Mutation {
 }
 
 
+
 input EmployeeUpdateDto {
     name: String!
     salary: Float!
+   # department: DepartmentDto!
 }
 
 input EmployeeCreateDto  {
     name: String!
     salary: Float!
+    # department: DepartmentDto!
 }
 
 
@@ -33,6 +37,20 @@ type EmployeeDto{
  	id: ID
 	name: String
 	salary: Float
+	department: DepartmentDto
+}
+
+type EmployeeSummaryDto{
+    id: ID
+	name: String
+	salary: Float
+}
+
+
+type DepartmentDto{
+	id: ID
+	name: String
+	employees: [EmployeeSummaryDto]
 }
 
 type Employee {
@@ -51,3 +69,4 @@ type EmployeePageDto {
     last: Boolean
 
 }
+

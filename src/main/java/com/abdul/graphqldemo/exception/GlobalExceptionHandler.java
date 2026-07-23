@@ -2,7 +2,6 @@ package com.abdul.graphqldemo.exception;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.springframework.graphql.data.method.annotation.GraphQlExceptionHandler;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import graphql.ErrorType;
 import graphql.GraphQLError;
 import graphql.GraphqlErrorBuilder;
-import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 
 //To handle global excepiton use controlleradvice
@@ -24,8 +22,8 @@ public class GlobalExceptionHandler {
 //		
 //	}
     
-    @GraphQlExceptionHandler(EmployeeNotFoundException.class)
-    public GraphQLError handleEmployeeNotFound(EmployeeNotFoundException ex) {
+    @GraphQlExceptionHandler(ResourceNotFoundException.class)
+    public GraphQLError handleEmployeeNotFound(ResourceNotFoundException ex) {
         return GraphqlErrorBuilder.newError()
                 .errorType(ErrorType.DataFetchingException)
                 .message(ex.getMessage())

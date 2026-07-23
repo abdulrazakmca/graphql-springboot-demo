@@ -13,6 +13,10 @@ public class Employee {
     private String name;
 
     private Double salary;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_id")
+    private Department department;
 
     public Employee() {
     }
@@ -46,4 +50,14 @@ public class Employee {
     public void setSalary(Double salary) {
         this.salary = salary;
     }
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+    
+    
 }

@@ -6,7 +6,7 @@ public record EmployeeUpdateDto(
 		@NotBlank(message = "Employee name is required")
         String name,
         @Positive(message = "Salary must be greater than zero")
-        Double salary
+        Double salary,Long departmentId
 ) {
 }
 
