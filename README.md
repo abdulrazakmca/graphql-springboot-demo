@@ -206,3 +206,55 @@ public class Employee {
     @JoinColumn(name = "department_id")
     private Department department;
 }
+
+## Phase 1 – Understand the N+1 Problem
+What is the N+1 problem?
+
+
+## Phase 2 – Solve with 
+Batch loading
+Request-scoped caching
+Implementing a DepartmentDataLoader
+
+We'll compare the SQL before and after to see the improvement.
+
+## Phase 3 – @SchemaMapping
+
+Instead of always fetching everything eagerly, we'll resolve nested fields only when requested.
+
+Example:
+
+query {
+  employees {
+    id
+    name
+    department {
+      name
+    }
+  }
+}
+
+Here, the department field will be loaded only if the GraphQL query requests it.
+
+## Phase 4 - Advanced GraphQL
+
+After DataLoader, we'll cover:
+
+Custom Scalars
+GraphQL Interfaces
+GraphQL Unions
+Enums
+Subscriptions
+File Uploads
+
+## Phase 5 – Security
+
+We'll secure the API with:
+
+Spring Security
+JWT Authentication
+Role-Based Authorization
+Method Security
+Phase 6 – Production Best Practices
+
+
